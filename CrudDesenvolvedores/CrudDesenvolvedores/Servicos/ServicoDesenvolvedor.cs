@@ -18,77 +18,146 @@ namespace CrudDesenvolvedores.Services
 
         public List<Desenvolvedor> ObterDesenvolvedoresPeloNome(string nome)
         {
-            var desenvolvedores = _context.Desenvolvedor?
-          .Where(x => x.Nome == nome)?
-          .AsNoTracking()?
-          .ToList();
+            try
+            {
+                var desenvolvedores = _context.Desenvolvedor?
+                  .Where(x => x.Nome == nome)?
+                  .AsNoTracking()?
+                  .ToList();
 
-            return desenvolvedores;
+                return desenvolvedores;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool VerificarSeDesenvolvedorExiste(Desenvolvedor desenvolvedor)
         {
-            var existe = _context.Desenvolvedor?
+            try
+            {
+                var existe = _context.Desenvolvedor?
                 .Any(x => x.Nome == desenvolvedor.Nome
                 && x.Idade == desenvolvedor.Idade
                 && x.Sexo == desenvolvedor.Sexo);
 
-            if (existe != null)
-                return (bool)existe;
+                if (existe != null)
+                    return (bool)existe;
 
-            return false;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void AtualizarDesenvolvedor(Desenvolvedor desenvolvedor)
         {
-            _context.Entry(desenvolvedor).State = EntityState.Modified;
-            _context.SaveChanges();
+            try
+            {
+                _context.Entry(desenvolvedor).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void ExcluirDesenvolvedor(int id)
         {
-            var desenvolvedor = ObterDesenvolvedorPorId(id);
-
-            if (desenvolvedor != null)
+            try
             {
-                _context.Desenvolvedor.Remove(desenvolvedor);
-                _context.SaveChanges();
+                if (id == 0)
+                    throw new Exception("Código inválido para a exlcusão");
+
+                var desenvolvedor = ObterDesenvolvedorPorId(id);
+
+                if (desenvolvedor != null)
+                {
+                    _context.Desenvolvedor.Remove(desenvolvedor);
+                    _context.SaveChanges();
+                }
+                else
+                    throw new Exception("Desenvoledor não encontrado!");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
         public void InserirDesenvolvedor(Desenvolvedor desenvolvedor)
         {
-            _context.Desenvolvedor.Add(desenvolvedor);
-            _context.SaveChanges();
+            try
+            {
+                if (desenvolvedor == null)
+                {
+                    throw new Exception("Nenhum desenvolvedor para inserir!");
+                }
+
+                _context.Desenvolvedor.Add(desenvolvedor);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Desenvolvedor> ObterDesenvolvedores(string nome = "", int? page = null, int? pageSize = 5)
         {
-            var desenvolvedor = _context.Desenvolvedor
+            try
+            {
+                var desenvolvedor = _context.Desenvolvedor
                     ?.AsNoTracking()
                     ?.ToList();
 
-            return desenvolvedor;
+                return desenvolvedor;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Desenvolvedor ObterDesenvolvedorPorId(int id)
         {
-            var desenvolvedor = _context.Desenvolvedor
-                    ?.Where(x => x.DesenvolvedorId == id)
-                    ?.AsNoTracking()
-                    ?.FirstOrDefault();
+            try
+            {
+                if (id == 0)
+                    throw new Exception("Código inválido para a consulta!");
 
-            return desenvolvedor;
+                var desenvolvedor = _context.Desenvolvedor
+                        ?.Where(x => x.DesenvolvedorId == id)
+                        ?.AsNoTracking()
+                        ?.FirstOrDefault();
+
+                return desenvolvedor;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Desenvolvedor> RetornarPesquisaComPaginacao(int? page = null, int? pageSize = 5)
         {
-            var comPaginacao = _context.Desenvolvedor?
+            try
+            {
+                var comPaginacao = _context.Desenvolvedor?
                   .Skip(((int)page - 1) * (int)pageSize)
                   .Take((int)pageSize)
                   .ToList();
 
-            return comPaginacao;
+                return comPaginacao;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -14,7 +14,12 @@ namespace CrudDesenvolvedores.Dados
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-           => optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=123456");
+        {
+            if (!optionsBuilder.IsConfigured)// previne de configurar duas vezes
+            {
+                optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=123456");
+            }
+        }
 
         public DbSet<Desenvolvedor> Desenvolvedor { get; set; }
     }
