@@ -29,7 +29,6 @@ namespace CrudDesenvolvedoresTeste
                 Hobby = "Nenhum",
                 DataDeNascimento = DateTime.Now
             };
-
             _servico.InserirDesenvolvedor(desenvolvedor);
         }
 
@@ -47,20 +46,27 @@ namespace CrudDesenvolvedoresTeste
             Assert.Single(desenvolvedores);
         }
 
-        [Fact(DisplayName = "Excluir_Desenvolvedor")]
-        public void Test_Excluir_Desenvolvedor()
+        [Fact(DisplayName = "ObterPorId")]
+        public void Test_Obter_Por_Id()
         {
             InserirDesenvolvedor();
-            var desenvolvedor = _servico.ObterDesenvolvedores()?.FirstOrDefault();
+            var desenvolvedores = _servico.ObterDesenvolvedores();
 
-            // nao pode ser null o objeto
-            Assert.NotNull(desenvolvedor);
+            // tem regristos
+            Assert.Single(desenvolvedores);
 
-            _servico.ExcluirDesenvolvedor(desenvolvedor.DesenvolvedorId);
+            if (desenvolvedores?.Count > 0)
+            {
+                var desenvolvedor = _servico
+                    .ObterDesenvolvedorPorId(desenvolvedores.FirstOrDefault().DesenvolvedorId);
+
+                // nao pode ser null o objeto
+                Assert.NotNull(desenvolvedor);
+            }
         }
 
-        [Fact(DisplayName = "Atualizar_Desenvolvedor")]
-        public void Teste_Atualizar_Desenvolvedor()
+        [Fact(DisplayName = "ValidarInsercaoPorNome")]
+        public void Test_Validar_Insercao_Nome()
         {
             var desenvolvedor = new Desenvolvedor()
             {
@@ -75,15 +81,9 @@ namespace CrudDesenvolvedoresTeste
 
             var desenvolvedores = _servico.ObterDesenvolvedores();
 
-            if (desenvolvedores?.Count > 0)
-            {
-                var desenvolvedorParaAtualizar = desenvolvedores.FirstOrDefault();
-                desenvolvedorParaAtualizar.Nome = "Marcio Atualizado";
-                _servico.AtualizarDesenvolvedor(desenvolvedorParaAtualizar);
-            }
-
-            // nao pode ser null o objeto
             Assert.NotNull(desenvolvedores);
+
+            Assert.Contains(desenvolvedores, item => item.Nome == desenvolvedor.Nome);
         }
     }
 }
