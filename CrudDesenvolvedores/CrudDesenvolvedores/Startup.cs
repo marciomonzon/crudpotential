@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CrudDesenvolvedores.Dados;
+using CrudDesenvolvedores.Interfaces;
+using CrudDesenvolvedores.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +29,12 @@ namespace CrudDesenvolvedores
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
 
             services.AddDbContext<DesenvolvedorContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("DesenvolvedorConnection")));
+
+            services.AddTransient<IServicoDesenvolvedor, ServicoDesenvolvedor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
