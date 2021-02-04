@@ -1,13 +1,8 @@
-﻿using CrudDesenvolvedores.Dados;
-using CrudDesenvolvedores.Interfaces;
+﻿using CrudDesenvolvedores.Interfaces;
 using CrudDesenvolvedores.Models;
-using CrudDesenvolvedores.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 
 namespace CrudDesenvolvedores.Controllers
 {
