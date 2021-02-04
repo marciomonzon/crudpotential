@@ -3,6 +3,7 @@ using CrudDesenvolvedores.Models;
 using CrudDesenvolvedores.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -32,14 +33,6 @@ namespace CrudDesenvolvedoresTeste
             _servico.InserirDesenvolvedor(desenvolvedor);
         }
 
-        private void ExcluirDesenvolvedor(List<Desenvolvedor> devs)
-        {
-            foreach (var item in devs)
-            {
-                _servico.ExcluirDesenvolvedor(item.DesenvolvedorId);
-            }
-        }
-
         [Fact(DisplayName = "Obter_Desenvolvedores")]
         public void Test_Obter_Desenvolvedores()
         {
@@ -52,9 +45,45 @@ namespace CrudDesenvolvedoresTeste
 
             // tem regristos
             Assert.Single(desenvolvedores);
-
-            ExcluirDesenvolvedor(desenvolvedores);
         }
 
+        [Fact(DisplayName = "Excluir_Desenvolvedor")]
+        public void Test_Excluir_Desenvolvedor()
+        {
+            InserirDesenvolvedor();
+            var desenvolvedor = _servico.ObterDesenvolvedores()?.FirstOrDefault();
+
+            // nao pode ser null o objeto
+            Assert.NotNull(desenvolvedor);
+
+            _servico.ExcluirDesenvolvedor(desenvolvedor.DesenvolvedorId);
+        }
+
+        [Fact(DisplayName = "Atualizar_Desenvolvedor")]
+        public void Teste_Atualizar_Desenvolvedor()
+        {
+            var desenvolvedor = new Desenvolvedor()
+            {
+                Nome = "Marcio Teste",
+                Sexo = "M",
+                Idade = 50,
+                Hobby = "Nenhum",
+                DataDeNascimento = DateTime.Now
+            };
+
+            _servico.InserirDesenvolvedor(desenvolvedor);
+
+            var desenvolvedores = _servico.ObterDesenvolvedores();
+
+            if (desenvolvedores?.Count > 0)
+            {
+                var desenvolvedorParaAtualizar = desenvolvedores.FirstOrDefault();
+                desenvolvedorParaAtualizar.Nome = "Marcio Atualizado";
+                _servico.AtualizarDesenvolvedor(desenvolvedorParaAtualizar);
+            }
+
+            // nao pode ser null o objeto
+            Assert.NotNull(desenvolvedores);
+        }
     }
 }
