@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Nav, Navbar, Table, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/Api';
 import moment from 'moment';
+import userEvent from '@testing-library/user-event';
 
 interface IDesenvolvedor {
     desenvolvedorId: number,
@@ -15,6 +17,7 @@ interface IDesenvolvedor {
 const Desenvolvedores: React.FC = () => {
 
     const [desenvolvedores, setDesenvolvedores] = useState<IDesenvolvedor[]>([])
+    const history = useHistory();
 
     useEffect(() => {
         carregarDesenvolvedores();
@@ -22,14 +25,7 @@ const Desenvolvedores: React.FC = () => {
 
     async function carregarDesenvolvedores() {
 
-        const response = await api.get('/developers?page=1');
-        console.log(response);
-        setDesenvolvedores(response.data)
-    }
-
-    async function carregarDesenvolvedoresPaginado(pagina: number) {
-
-        const response = await api.get('/developers?page=' + pagina);
+        const response = await api.get('/developers');
         console.log(response);
         setDesenvolvedores(response.data)
     }
@@ -38,12 +34,20 @@ const Desenvolvedores: React.FC = () => {
         return moment(dataDeNascimento).format("DD/MM/YYYY");
     }
 
+    function novoDesenvolvedor() {
+        history.push('/formulario');
+    }
+
     return (
-        <div className="container text-center">
+        <div className="container">
             <br/>
             <h3>Desenvolvedores</h3>
             <br/>
-            <Table striped bordered hover>
+            <div>
+                <Button variant="dark" size="sm" onClick={novoDesenvolvedor}>Novo Desenvovledor</Button>
+            </div>
+            <br/>
+            <Table striped bordered hover className="text-center">
                 <thead>                 
                     <tr>
                         <th>#</th>

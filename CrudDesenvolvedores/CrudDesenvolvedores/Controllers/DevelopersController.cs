@@ -1,4 +1,6 @@
-﻿using CrudDesenvolvedores.Interfaces;
+﻿using CrudDesenvolvedores.DTO;
+using CrudDesenvolvedores.Fabricas;
+using CrudDesenvolvedores.Interfaces;
 using CrudDesenvolvedores.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -82,12 +84,14 @@ namespace CrudDesenvolvedores.Controllers
 
         // /developers
         [HttpPost]
-        public IActionResult InserirDesenvolvedor(Desenvolvedor desenvolvedor)
+        public IActionResult InserirDesenvolvedor(DtoDesenvolvedor dto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    var desenvolvedor = FabricaDesenvolvedor.NovoObjetoDesenvolvedor(dto);
+
                     var existe = _servicoDesenvolvedor.
                         VerificarSeDesenvolvedorExiste(desenvolvedor);
 

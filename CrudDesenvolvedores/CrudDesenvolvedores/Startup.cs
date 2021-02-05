@@ -35,7 +35,15 @@ namespace CrudDesenvolvedores
 
             services.AddTransient<IServicoDesenvolvedor, ServicoDesenvolvedor>();
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("foo",
+                builder =>
+                {
+                    // Not a permanent solution, but just trying to isolate the problem
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +58,7 @@ namespace CrudDesenvolvedores
 
             app.UseAuthorization();
 
-            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseCors("foo");
 
             app.UseEndpoints(endpoints =>
             {
