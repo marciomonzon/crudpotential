@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Nav, Navbar, Table, Button, Form } from 'react-bootstrap';
 import api from '../../services/Api';
 
@@ -11,10 +11,14 @@ interface IDesenvolvedor {
     dataDeNascimento: string
 }
 
+interface IParamsProps {
+    id: string;
+}
+
 const FormularioDesenvolvedores: React.FC = () => {
 
     const history = useHistory();
-
+    const { id }= useParams<IParamsProps>();
     const [model, setModel] = useState<IDesenvolvedor>({
         nome: '',
         idade: '',
@@ -22,6 +26,13 @@ const FormularioDesenvolvedores: React.FC = () => {
         hobby: '',
         dataDeNascimento: ''
     });
+
+    useEffect(() => {
+        if(id != undefined){
+            obterDesenvolvedor(id);
+        }
+        
+    }, [id]);
 
     function updatedModel(e: ChangeEvent<HTMLInputElement>) {
         setModel({
@@ -33,8 +44,27 @@ const FormularioDesenvolvedores: React.FC = () => {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const response = await api.post('/developers', model);
-        console.log(response);
+        if(id != undefined){
+            const response = await api.put(`/developers/${id}`, model);
+        }
+        else{
+            const response = await api.post('/developers', model);
+        }
+
+        voltar();
+    }
+
+    async function obterDesenvolvedor(id: string) {
+        const response = await api.get(`/developers/${id}`);
+
+        setModel({
+            nome: response.data.nome,
+            idade: response.data.idade,
+            sexo: response.data.sexo,
+            hobby: response.data.hobby,
+            dataDeNascimento: response.data.dataDeNascimento
+        })
+
     }
 
     function voltar() {
@@ -58,30 +88,35 @@ const FormularioDesenvolvedores: React.FC = () => {
 
                     <Form.Control type="text" 
                     maxLength={100} 
-                    name="nome" 
+                    name="nome"
+                    value={model.nome} 
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                     />
 
                     <Form.Label>Idade:</Form.Label>
                     <Form.Control type="number" 
                     name="idade" 
+                    value={model.idade} 
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                     />
 
                     <Form.Label>Sexo (M/F):</Form.Label>
                     <Form.Control type="text"  maxLength={1}
                     name="sexo" 
+                    value={model.sexo} 
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                     />
                     <Form.Label>Data de Nascimento:</Form.Label>
                     <Form.Control type="text"  
                     name="dataDeNascimento" 
+                    value={model.dataDeNascimento} 
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                     />
 
                     <Form.Label>Hobby:</Form.Label>
                     <Form.Control type="text" maxLength={100}
                     name="hobby" 
+                    value={model.hobby} 
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
                     />
                 </Form.Group>

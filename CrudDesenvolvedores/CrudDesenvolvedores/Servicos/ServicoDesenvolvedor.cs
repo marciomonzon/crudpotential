@@ -53,11 +53,19 @@ namespace CrudDesenvolvedores.Services
             }
         }
 
-        public void AtualizarDesenvolvedor(Desenvolvedor desenvolvedor)
+        public void AtualizarDesenvolvedor(int id, Desenvolvedor desenvolvedor)
         {
             try
             {
-                _context.Entry(desenvolvedor).State = EntityState.Modified;
+                var desenvContext = _context.Desenvolvedor.Find(id);
+
+                desenvContext.DataDeNascimento = desenvolvedor.DataDeNascimento;
+                desenvContext.DesenvolvedorId = id;
+                desenvContext.Hobby = desenvolvedor.Hobby;
+                desenvContext.Nome = desenvolvedor.Nome;
+                desenvContext.Idade = desenvolvedor.Idade;
+                desenvContext.Sexo = desenvolvedor.Sexo;
+
                 _context.SaveChanges();
             }
             catch (Exception ex)

@@ -26,7 +26,6 @@ const Desenvolvedores: React.FC = () => {
     async function carregarDesenvolvedores() {
 
         const response = await api.get('/developers');
-        console.log(response);
         setDesenvolvedores(response.data)
     }
 
@@ -36,6 +35,11 @@ const Desenvolvedores: React.FC = () => {
 
     function novoDesenvolvedor() {
         history.push('/formulario');
+    }
+
+    function editarDesenvolvedor(id: number) {
+        history.push(`/formulario/${id}`);
+
     }
 
     return (
@@ -70,7 +74,8 @@ const Desenvolvedores: React.FC = () => {
                                 <td>{ d.hobby }</td>
                                 <td>{ formatarDataDeNascimento(d.dataDeNascimento) }</td>
                                 <td>
-                                    <Button size="sm">Editar</Button>{' '}
+                                    <Button size="sm" onClick={() => editarDesenvolvedor(d.desenvolvedorId)}>
+                                        Editar</Button>{' '}
                                     <Button size="sm" variant="success">Finalizar</Button>{' '}
                                     <Button size="sm" variant="info">Visualizar</Button>{' '}
                                     <Button size="sm" variant="danger">Remover</Button>{' '}

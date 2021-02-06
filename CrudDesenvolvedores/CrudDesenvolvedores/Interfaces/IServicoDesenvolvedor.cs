@@ -9,7 +9,7 @@ namespace CrudDesenvolvedores.Interfaces
         Desenvolvedor ObterDesenvolvedorPorId(int id);
         void InserirDesenvolvedor(Desenvolvedor desenvolvedor);
         void ExcluirDesenvolvedor(int id);
-        void AtualizarDesenvolvedor(Desenvolvedor desenvolvedor);
+        void AtualizarDesenvolvedor(int id, Desenvolvedor desenvolvedor);
         bool VerificarSeDesenvolvedorExiste(Desenvolvedor desenvolvedor);
         List<Desenvolvedor> ObterDesenvolvedoresPeloNome(string nome);
         List<Desenvolvedor> RetornarPesquisaComPaginacao(int? page = null, int? pageSize = 5);

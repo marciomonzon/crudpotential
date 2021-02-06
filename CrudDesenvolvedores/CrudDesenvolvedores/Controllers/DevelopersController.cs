@@ -151,7 +151,7 @@ namespace CrudDesenvolvedores.Controllers
 
                 if (desenvolvedorEncontrado != null)
                 {
-                    _servicoDesenvolvedor.AtualizarDesenvolvedor(desenvolvedor);
+                    _servicoDesenvolvedor.AtualizarDesenvolvedor(id, desenvolvedor);
                     return Ok($"Desenvolvedor atualizado com sucesso. Nome do Desenvolvedor: {desenvolvedor.Nome}");
                 }
                 else
