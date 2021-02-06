@@ -8,12 +8,15 @@ using System.Collections.Generic;
 
 namespace CrudDesenvolvedores.Controllers
 {
-
+    /// <summary>
+    /// Controller dos Desenvolvedores
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class DevelopersController : ControllerBase
     {
         private readonly IServicoDesenvolvedor _servicoDesenvolvedor;
+        private const int QTDE_REGISTROS_POR_PAGINA = 5;
 
         public DevelopersController(IServicoDesenvolvedor service)
         {
@@ -31,9 +34,15 @@ namespace CrudDesenvolvedores.Controllers
             return NotFound($"Nenhum desenvolvedor encontrado! Nome informado: {nome}");
         }
 
-        // /developers
+        /// <summary>
+        /// Obter os Desenvovledores
+        /// </summary>
+        /// <param name="nome">Nome do desenvolvedor</param>
+        /// <param name="page">número da página para a paginação</param>
+        /// <param name="pageSize">quantidade de registros a exibir. Já tem um número definido.</param>
+        /// <returns>Retorna o objeto com os desenvolvedores ou um código HTTP</returns>
         [HttpGet]
-        public IActionResult ObterDesenvolvedores(string nome = "", int? page = null, int? pageSize = 5)
+        public IActionResult ObterDesenvolvedores(string nome = "", int? page = null, int? pageSize = QTDE_REGISTROS_POR_PAGINA)
         {
             try
             {
@@ -58,7 +67,11 @@ namespace CrudDesenvolvedores.Controllers
             }
         }
 
-        // /developers/id
+        /// <summary>
+        /// Obter um desenvolvedor pelo código de cadastro
+        /// </summary>
+        /// <param name="id">Código de Cadastro</param>
+        /// <returns>Retorna o objeto com o desenvolvedor ou um código HTTP</returns>
         [HttpGet("{id}")]
         public IActionResult ObterDesenvolvedorPorId(int id)
         {
@@ -82,7 +95,11 @@ namespace CrudDesenvolvedores.Controllers
             }
         }
 
-        // /developers
+        /// <summary>
+        /// Cadastra um desenvolvedor
+        /// </summary>
+        /// <param name="dto">Objeto enviado para o cadastro</param>
+        /// <returns>Retorna um código HTTP</returns>
         [HttpPost]
         public IActionResult InserirDesenvolvedor(DtoDesenvolvedor dto)
         {
@@ -110,7 +127,11 @@ namespace CrudDesenvolvedores.Controllers
             }
         }
 
-        // /developers/id
+        /// <summary>
+        /// Exclui um desenvolvedor pelo código de cadastro
+        /// </summary>
+        /// <param name="id">Código de cadastro</param>
+        /// <returns>Retorna um código HTTP</returns>
         [HttpDelete("{id}")]
         public IActionResult ExcluirDesenvolvedor(int id)
         {
@@ -137,7 +158,12 @@ namespace CrudDesenvolvedores.Controllers
             }
         }
 
-        // /developers/id
+        /// <summary>
+        /// Atualiza um desenvolvedor
+        /// </summary>
+        /// <param name="id">Código do desenolvedor</param>
+        /// <param name="desenvolvedor">Objeto com os campos para atualizar</param>
+        /// <returns>Retorna um código HTTP</returns>
         [HttpPut("{id}")]
         public IActionResult AtualizarDesenvolvedor(int id, Desenvolvedor desenvolvedor)
         {

@@ -97,8 +97,6 @@ const Desenvolvedores: React.FC = () => {
                     }
                 </tbody>
             </Table>
-                    
-            <Button href="#">Anterior</Button> <Button href="#">Proximo</Button> 
         </div>
     );
     
