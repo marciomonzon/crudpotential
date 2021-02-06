@@ -29,6 +29,15 @@ Nesta API foi utilizado o ASP.NET Core 3.1 e nela usei os seguintes conceitos e 
 - PUT http://localhost:59607/developers/id (com o objetono body) para a atualização
 - DELETE http://localhost:59607/developers (para a exclusão)
 
+```
+ObterDesenvolvedores(string nome = "", int? page = null, int? pageSize = QTDE_REGISTROS_POR_PAGINA)
+ObterDesenvolvedores(string nome = "", int? page = null, int? pageSize = QTDE_REGISTROS_POR_PAGINA)
+ObterDesenvolvedorPorId(int id)
+InserirDesenvolvedor(DtoDesenvolvedor dto)(int id)
+AtualizarDesenvolvedor(int id, Desenvolvedor desenvolvedor)
+ExcluirDesenvolvedor(int id)
+```
+
 ### Dcumentação da API
 
 Foi implementado o Swagger para a documentação da API. Este mostra todos os métodos e os comentários das prorpiedades e métodos.
