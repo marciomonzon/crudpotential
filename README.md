@@ -1,8 +1,9 @@
 # Cadastro de Desenvolvedores - API e React
 
-Foi desenvolvido uma API em ASP.NET Core 3.1 com o Swagger de documentação e como Frontend foi utilizado o React JS.
-Foi utilizado o Postgres como banco de dados.
-A API está na pasta CrudDesenvolvedores e o SPA está na pasta crud_frontend
+- Foi desenvolvido uma API em ASP.NET Core 3.1 com o Swagger de documentação e como Frontend foi utilizado o React JS;
+- Foi utilizado o Postgres como banco de dados;
+- ***Foram desenvolvidos testes unitários na API***
+- A API está na pasta CrudDesenvolvedores e o SPA está na pasta crud_frontend
 
 ## API
 
@@ -57,6 +58,14 @@ Os seguintes conceitos foram utilizados:
 - Exclusão;
 
 **Observação importante: para alterar o caminho da api, deve acessar o arquivo services/api.ts**
+
+### Testes unitários
+
+Foi utilizado um banco em memória e os Testes deves ser executados individualmente.
+
+- Test_Obter_Desenvolvedores;
+- Test_Obter_Por_Id;
+- Test_Validar_Insercao_Nome.
 
 ### Script da tabela do banco Postgres
 
