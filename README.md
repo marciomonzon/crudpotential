@@ -13,6 +13,9 @@ Nesta API foi utilizado o ASP.NET Core 3.1 e nela usei os seguintes conceitos e 
 - Model;
 - Interface;
 - Injeção de Dependência;
+- Classe de Serviço;
+- Classe Extensions;
+- Fabrica de Objeto;
 - Entity Framework Core;
 - Linq;
 - Banco Postgres.
