@@ -74,22 +74,15 @@ namespace CrudDesenvolvedores.Services
             }
         }
 
-        public void ExcluirDesenvolvedor(int id)
+        public void ExcluirDesenvolvedor(Desenvolvedor desenvolvedor)
         {
             try
             {
-                if (id == 0)
+                if (desenvolvedor.DesenvolvedorId == 0)
                     throw new Exception("Código inválido para a exlcusão");
 
-                var desenvolvedor = ObterDesenvolvedorPorId(id);
-
-                if (desenvolvedor != null)
-                {
-                    _context.Desenvolvedor.Remove(desenvolvedor);
-                    _context.SaveChanges();
-                }
-                else
-                    throw new Exception("Desenvoledor não encontrado!");
+                _context.Desenvolvedor.Remove(desenvolvedor);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {

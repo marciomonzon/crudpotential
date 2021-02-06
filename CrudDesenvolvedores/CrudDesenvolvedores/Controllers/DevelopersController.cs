@@ -124,7 +124,7 @@ namespace CrudDesenvolvedores.Controllers
 
                 if (desenvolvedorEncontrado != null)
                 {
-                    _servicoDesenvolvedor.ExcluirDesenvolvedor(id);
+                    _servicoDesenvolvedor.ExcluirDesenvolvedor(desenvolvedorEncontrado);
                     return Ok($"Desenvolvedor excluido com sucesso." +
                         $" Nome do Desenvolvedor: {desenvolvedorEncontrado.Nome}");
                 }

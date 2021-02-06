@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Desenvolvedores from './pages/desenvolvedores';
 import DesenvolvedorForm from './pages/forms';
+import DesenvolvedorDetalhes from './pages/visualizar';
 
 
 const Routes: React.FC = () => {
@@ -13,6 +14,7 @@ const Routes: React.FC = () => {
             <Route path="/developers" exact component={ Desenvolvedores } />
             <Route path="/formulario" exact component={ DesenvolvedorForm } />
             <Route path="/formulario/:id" exact component={ DesenvolvedorForm } />
+            <Route path="/detalhes/:id" exact component={ DesenvolvedorDetalhes } />
         </Switch>
     )
 }

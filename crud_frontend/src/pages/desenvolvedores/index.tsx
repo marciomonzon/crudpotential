@@ -23,6 +23,7 @@ const Desenvolvedores: React.FC = () => {
         carregarDesenvolvedores();
     }, []);
 
+    
     async function carregarDesenvolvedores() {
 
         const response = await api.get('/developers');
@@ -40,6 +41,16 @@ const Desenvolvedores: React.FC = () => {
     function editarDesenvolvedor(id: number) {
         history.push(`/formulario/${id}`);
 
+    }
+
+    function visualizarDesenvolvedor(id: number) {
+        history.push(`/detalhes/${id}`);
+
+    }
+
+    async function excluirDesenvolvedor(id: number) {
+        await api.delete(`/developers/${id}`)
+        carregarDesenvolvedores()
     }
 
     return (
@@ -76,9 +87,10 @@ const Desenvolvedores: React.FC = () => {
                                 <td>
                                     <Button size="sm" onClick={() => editarDesenvolvedor(d.desenvolvedorId)}>
                                         Editar</Button>{' '}
-                                    <Button size="sm" variant="success">Finalizar</Button>{' '}
-                                    <Button size="sm" variant="info">Visualizar</Button>{' '}
-                                    <Button size="sm" variant="danger">Remover</Button>{' '}
+                                    <Button size="sm" variant="info" onClick={() => visualizarDesenvolvedor(d.desenvolvedorId)}>Visualizar</Button>{' '}
+                                    <Button size="sm" variant="danger" 
+                                        onClick={() => excluirDesenvolvedor(d.desenvolvedorId)}
+                                    >Remover</Button>{' '}
                                 </td>
                             </tr>
                         ))

@@ -8,7 +8,7 @@ namespace CrudDesenvolvedores.Interfaces
         List<Desenvolvedor> ObterDesenvolvedores(string nome = "", int? page = null, int? pageSize = 5);
         Desenvolvedor ObterDesenvolvedorPorId(int id);
         void InserirDesenvolvedor(Desenvolvedor desenvolvedor);
-        void ExcluirDesenvolvedor(int id);
+        void ExcluirDesenvolvedor(Desenvolvedor desenvolvedor);
         void AtualizarDesenvolvedor(int id, Desenvolvedor desenvolvedor);
         bool VerificarSeDesenvolvedorExiste(Desenvolvedor desenvolvedor);
         List<Desenvolvedor> ObterDesenvolvedoresPeloNome(string nome);
