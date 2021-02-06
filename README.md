@@ -2,8 +2,8 @@
 
 - Foi desenvolvido uma API em ASP.NET Core 3.1 com o Swagger de documentação e como Frontend foi utilizado o React JS;
 - Foi utilizado o Postgres como banco de dados;
-- ***Foram desenvolvidos testes unitários na API***
-- A API está na pasta CrudDesenvolvedores e o SPA está na pasta crud_frontend
+- ***Foram desenvolvidos testes unitários na API***;
+- A API está na pasta CrudDesenvolvedores e o SPA está na pasta crud_frontend.
 
 ## API
 
