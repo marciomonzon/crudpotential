@@ -24,6 +24,7 @@ Nesta API foi utilizado o ASP.NET Core 3.1 e nela usei os seguintes conceitos e 
 
 - GET http://localhost:59607/developers (obtem todos os desenvolvedores)
 - GET http://localhost:59607/developers?page= (usado como paginação)
+- GET http://localhost:59607/developers/id (obter por id)
 - POST http://localhost:59607/developers (para a inserção)
 - PUT http://localhost:59607/developers/id (com o objetono body) para a atualização
 - DELETE http://localhost:59607/developers (para a exclusão)
