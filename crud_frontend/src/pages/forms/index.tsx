@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Nav, Navbar, Table, Button, Form } from 'react-bootstrap';
 import api from '../../services/Api';
 
@@ -11,6 +12,8 @@ interface IDesenvolvedor {
 }
 
 const FormularioDesenvolvedores: React.FC = () => {
+
+    const history = useHistory();
 
     const [model, setModel] = useState<IDesenvolvedor>({
         nome: '',
@@ -34,13 +37,17 @@ const FormularioDesenvolvedores: React.FC = () => {
         console.log(response);
     }
 
+    function voltar() {
+        history.goBack();
+    }
+
     return (
         <div className="container">
             <br/>
             <h3>Novo Desenvolvedor</h3>
             <br/>
             <div>
-                <Button variant="dark" size="sm">Voltar</Button>
+                <Button variant="dark" size="sm" onClick={voltar} >Voltar</Button>
             </div>
             <br/>
 
